@@ -1,0 +1,25 @@
+name = "biblioteca-cloudflare-demo"
+main = "src/index.ts"
+compatibility_date = "2025-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# === D1 (base de datos SQL) ===
+# Reemplazá database_id después de correr `pnpm db:create`.
+[[d1_databases]]
+binding = "DB"
+database_name = "biblioteca"
+database_id = "REPLACE_WITH_YOUR_DB_ID"
+migrations_dir = "migrations"
+
+# === Durable Object (store de sesiones) ===
+[[durable_objects.bindings]]
+name = "SESSIONS"
+class_name = "SessionStore"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SessionStore"]
+
+# === Variables ===
+[vars]
+# Vacío por ahora. Para producción, usar `wrangler secret put` en vez de vars.
